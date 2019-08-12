@@ -52,11 +52,11 @@
         for (let index = 0; index < 3; index++) {
             href_arr.pop();
         }
-        href_arr.push('index.html');
 
         // add function for buttons click event
         sign_up_btn.addEventListener('click',function(event){
             event.preventDefault();
+            href_arr.push('index.html');
             window.location.href = href_arr.join('/');
         })
         login_btn.addEventListener('click', function(event){
@@ -72,7 +72,12 @@
                    auth = true;
                 }
                 });
-                auth ? alert('You are signed user') : alert('Your password or email is incorrect');
+               if(auth){
+                href_arr.push('src','pages','questions.html');
+                window.location.href = href_arr.join('/');
+               }else{
+                alert('Your password or email is incorrect')
+               }
             }else{
                 alert('Please fill all fields and try again.');
             }
