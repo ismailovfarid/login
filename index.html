@@ -56,10 +56,12 @@
     <script>
         let sign_up_btn = document.getElementById("sign-up-btn");
         let login_btn = document.getElementById('login-btn');
-        
+        let url_arr = window.location.href.split('/');
+        url_arr[url_arr.length-1] = 'src';
+        url_arr.push('pages','login.html');
         login_btn.addEventListener('click', function(event){
             event.preventDefault();
-            window.location.href = "file:///C:/Users/User/Desktop/Login/src/pages/login.html";
+            window.location.href = url_arr.join('/');
         })
 
         sign_up_btn.addEventListener("click",function (event) {
@@ -85,7 +87,7 @@
                 let json = JSON.stringify([user]);
                localStorage.setItem("users",json);
                } 
-               window.location.href = "file:///C:/Users/User/Desktop/Login/src/pages/login.html";
+               window.location.href = url_arr.join('/');
             }else{
                 alert("Confirm password must be equal to password. Please try again!");
             }
