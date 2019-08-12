@@ -41,9 +41,41 @@
     </footer>
     <script>
         let sign_up_btn = document.getElementById('sign-up-btn');
+        let login_btn = document.getElementById('login-btn');
+
+        //user login input tags
+        let email_input = document.getElementById('email');
+        let pwd_input = document.getElementById('password');
+
+
+        let href_arr = window.location.href.split('/');
+        for (let index = 0; index < 3; index++) {
+            href_arr.pop();
+        }
+        href_arr.push('index.html');
+
+        // add function for buttons click event
         sign_up_btn.addEventListener('click',function(event){
             event.preventDefault();
-            window.location.href = "file:///C:/Users/User/Desktop/Login/index.html";
+            window.location.href = href_arr.join('/');
+        })
+        login_btn.addEventListener('click', function(event){
+            event.preventDefault();
+            const email = email_input.value;
+            const pwd = pwd_input.value;
+
+            if(email && pwd){
+                let all_users = JSON.parse(localStorage.getItem('users'));
+                let auth = false;
+                all_users.forEach(user => {
+                if(user.email === email && user.password === pwd){
+                   auth = true;
+                }
+                });
+                auth ? alert('You are signed user') : alert('Your password or email is incorrect');
+            }else{
+                alert('Please fill all fields and try again.');
+            }
         })
     </script>
 </body>
