@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Register</title>
+</head>
+<body>
+    <header class="text-light">
+        Quick Answer
+    </header>
+    <main class="d-flex justify-content-center">
+        <section  class="text-light">
+            <h1 class="text-center text-light">Register</h1>
+            <form>
+                <div class="form-row">
+                        <div class="form-group col">
+                            <label for="first-name" class="text-light" >First Name</label>
+                            <input type="text" class="form-control "  name="first_name" id="first-name" min="3" max="15">
+                        </div>
+                        <div class="form-group col">
+                            <label for="last-name" class="text-light" >Last Name</label>
+                            <input type="text" class="form-control " name="last_name" id="last-name" min="3" max="15">
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label for="email" class="text-light">Email</label>
+                        <input type="email" class="form-control " name="email" id="email" min="3" max="15">
+                </div>
+                <div class="form-row">
+                        <div class="form-group col">
+                                <label for="password" class="text-light">Password</label>
+                                <input type="password" class="form-control" name="password" id="password" min="3" max="15">
+                            </div>
+                            <div class="form-group col">
+                                <label for="con-password" class="text-light">Confirm Password</label>
+                                <input type="password" class="form-control " name="con_password" id="con-password" min="3" max="15">
+                            </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <button type="submit" class="btn btn-outline-light col-lg-4"  id="sign-up-btn">Sign Up</button>
+                        <button class="btn btn-outline-light offset-lg-3 col-lg-5" id="login-btn">Login</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <footer class="text-light">
+        &copy; Farid Ismailov 2019
+    </footer>
+    <script>
+        let sign_up_btn = document.getElementById("sign-up-btn");
+        let login_btn = document.getElementById('login-btn');
+        
+        login_btn.addEventListener('click', function(event){
+            event.preventDefault();
+            window.location.href = "file:///C:/Users/User/Desktop/Login/src/pages/login.html";
+        })
+
+        sign_up_btn.addEventListener("click",function (event) {
+            event.preventDefault();
+            let first_name = document.getElementById("first-name");
+            let last_name = document.getElementById("last-name");
+            let email = document.getElementById("email");
+            let pwd = document.getElementById("password");
+            let confirm_pwd = document.getElementById("con-password");
+            if( pwd.value && pwd.value === confirm_pwd.value){
+                let user = {
+                first_name: first_name.value,
+                last_name: last_name.value,
+                email: email.value,
+                password: pwd.value
+                }
+               let json_all_users = localStorage.getItem("users");
+               if(json_all_users){
+                   let all_users = JSON.parse(json_all_users);
+                   all_users.push(user);
+                   localStorage.setItem("users", JSON.stringify(all_users));
+               }else{
+                let json = JSON.stringify([user]);
+               localStorage.setItem("users",json);
+               } 
+               window.location.href = "file:///C:/Users/User/Desktop/Login/src/pages/login.html";
+            }else{
+                alert("Confirm password must be equal to password. Please try again!");
+            }
+
+        })
+    </script>    
+</body>
+</html>
